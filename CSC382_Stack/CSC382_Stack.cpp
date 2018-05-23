@@ -161,6 +161,16 @@ public:
 		return size;
 	}
 
+	void PrintStack()
+	{
+		auto current_node = top;
+		while(current_node != nullptr)
+		{
+			cout << current_node->GetData() << endl;
+			current_node = current_node->GetNext();
+		}
+	}
+
 };
 
 bool NodeTestingSuite()
