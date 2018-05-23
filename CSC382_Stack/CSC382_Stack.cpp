@@ -70,12 +70,14 @@ public:
 		init();
 	}
 
+	// Constructs an empty stack object and then adds the specified initial value
 	CSC382_Stack(generic_type initial_stack_value)
 	{
 		init();
 		Push(initial_stack_value);
 	}
 
+	// Initialize the stack object variables
 	void init()
 	{
 		this->top = nullptr;
@@ -93,31 +95,30 @@ public:
 			top = next_stack_node;
 			size--;
 		}
-
-		//for()
 	}
 
 	// Push a node object onto the top of the stack
 	bool PushNode(shared_ptr<StackNode<generic_type>> new_stack_node)
 	{
+		// Add a new node to the top of the stack
 		if(top!=nullptr)
 		{
-			new_stack_node->SetNext(top);
-			top = new_stack_node;
+			new_stack_node->SetNext(top);		// Establish link between the new top node and the old top node
+			top = new_stack_node;				// Move the top pointer to the new node on top of the stack
 		}
 		else
 		{
-			top = new_stack_node;
+			top = new_stack_node;				// Stack is empty, so simply point top to the new node
 		}
 		size++;
 		return true;
 	}
 
 	// Creates a new StackNode and pushes it onto the top of the stack
+	// Returns whether the push was successfully executed
 	bool Push(generic_type insert_value)
 	{
-		//shared_ptr<StackNode<generic_type>> new_stack_node = new StackNode<generic_type>(insert_value);
-		shared_ptr<StackNode<generic_type>> new_stack_node = make_shared<StackNode<generic_type>>(insert_value);
+		auto new_stack_node = make_shared<StackNode<generic_type>>(insert_value);
 		bool push_status = PushNode(new_stack_node);
 		return push_status;
 	}
@@ -141,6 +142,12 @@ public:
 	shared_ptr<StackNode<generic_type>> PeekNode()
 	{
 		return top;
+	}
+
+	// Peek at the value of the top node on the stack without removing it.
+	generic_type PeekValue()
+	{
+		return top->GetData();
 	}
 
 	// Peek at the value of the top node without removing it.
