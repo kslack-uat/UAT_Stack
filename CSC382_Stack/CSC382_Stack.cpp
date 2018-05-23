@@ -226,7 +226,8 @@ bool StackTestingSuite()
 	}
 
 	//****** Single Parameter Constructor Test
-	CSC382_Stack<char>* char_stack = new CSC382_Stack<char>('u');
+	//CSC382_Stack<char>* char_stack = new CSC382_Stack<char>('u');
+	auto char_stack = make_shared<CSC382_Stack<char>>('u');
 	int char_stack_size = char_stack->GetSize();
 	if(char_stack_size == 1)
 	{
