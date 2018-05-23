@@ -115,11 +115,12 @@ public:
 
 	// Creates a new StackNode and pushes it onto the top of the stack
 	// Returns whether the push was successfully executed
-	bool Push(const generic_type insert_value)
+	void Push(const generic_type insert_value)
 	{
 		auto new_stack_node = make_shared<StackNode<generic_type>>(insert_value);
-		bool push_status = PushNode(new_stack_node);
-		return push_status;
+		PushNode(new_stack_node);
+		//bool push_status = PushNode(new_stack_node);
+		//return push_status;
 	}
 
 	// Pops a node off the stack and returns a smart pointer to the node
@@ -146,7 +147,15 @@ public:
 	// Peek at the value of the top node on the stack without removing it.
 	generic_type PeekValue()
 	{
-		return top->GetData();
+		if (top != nullptr)
+		{
+			return top->GetData();
+		}
+		else
+		{
+			cout << "Stack is empty." << endl;
+			return NULL;
+		}
 	}
 
 	// Peek at the top node without removing it.
@@ -188,10 +197,12 @@ bool NodeTestingSuite()
 bool StackTestingSuite()
 {
 	bool test_success = true;
-	// Stack Constructor Tests
-
-	// Default Stack Constructor Tests
-	CSC382_Stack<int>* stack_default_constructor = new CSC382_Stack<int>();		// Creates a new stack that is allocated on the heap
+	//**************************************
+	//****** Stack Constructor Tests *******
+	//****** Default Stack Constructor Tests
+	//make_shared<StackNode<generic_type>>(insert_value);
+	//CSC382_Stack<int>* stack_default_constructor = new CSC382_Stack<int>();		// Creates a new stack that is allocated on the heap
+	auto stack_default_constructor = make_shared<CSC382_Stack<int>>();
 	int stack_size = stack_default_constructor->GetSize();
 	if (stack_size == 0)
 	{
@@ -203,7 +214,7 @@ bool StackTestingSuite()
 		test_success = false;
 	}
 
-	int default_top_value = stack_default_constructor->Peek();
+	int default_top_value = stack_default_constructor->PeekValue();
 	if (default_top_value == NULL)
 	{
 		cout << "Success - Top is correctly set to nullptr after default constructor call." << endl;
@@ -214,7 +225,7 @@ bool StackTestingSuite()
 		test_success = false;
 	}
 
-	// Single Parameter Constructor Test
+	//****** Single Parameter Constructor Test
 	CSC382_Stack<char>* char_stack = new CSC382_Stack<char>('u');
 	int char_stack_size = char_stack->GetSize();
 	if(char_stack_size == 1)
@@ -226,6 +237,47 @@ bool StackTestingSuite()
 		cout << "FAIL - Size incorrectly reported of new stack using single parameter constructor. Size reported as " << char_stack_size << endl;
 		test_success = false;
 	}
+
+	char one_param_top_value = char_stack->PeekValue();
+	if (one_param_top_value == 'u')
+	{
+		cout << "Success - Top is correctly set to u after one parameter constructor call." << endl;
+	}
+	else
+	{
+		cout << "FAIL - Top not set to u following one parameter constructor call." << endl;
+		test_success = false;
+	}
+
+	//************************************
+	//****** Function Tests ******
+	// Push Tests
+	stack_default_constructor->Push(5);
+	if(stack_default_constructor->GetSize() == 1)
+	{
+		cout << "Success - Stack size is now 1 as expected." << endl;
+	}
+	else
+	{
+		cout << "FAIL - Stack size is not 1 as expected." << endl;
+		test_success = false;
+	}
+
+	int top_value = stack_default_constructor->PeekValue();
+	if(top_value == 5)
+	{
+		cout << "Success - Top value of stack is 5 as expected." << endl;
+	}
+	else
+	{
+		cout << "FAIL - Top value of stack is " << top_value << ". Expected a value of 5." << endl;
+		test_success = false;
+	}
+
+
+	// PushNode Tests
+	//auto new_stack_node = StackNode<int>(4);
+	//stack_default_constructor->PushNode(new_stack_node);
 
 	return test_success;
 }
