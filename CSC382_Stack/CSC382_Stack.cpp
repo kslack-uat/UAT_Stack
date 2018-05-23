@@ -128,6 +128,7 @@ public:
 	{
 		auto old_top = top;
 		top = top->GetNext();
+		size--;
 		return old_top;
 	}
 
@@ -315,25 +316,68 @@ bool StackTestingSuite()
 	cout << "Expected output is:\n4\n5" << endl;
 	cout << "Actual output is:" << endl;
 	stack_default_constructor->PrintStack();
-
-	// Pop Test
-
-
 	
 
+	// Pop Test
+	auto pop_node = stack_default_constructor->Pop();
+	if(pop_node != nullptr)
+	{
+		if (pop_node->GetData() == 4)
+		{
+			cout << "Success - Node successfully poped off the stack." << endl;
+		}
+		else
+		{
+			cout << "FAIL - Correct value was not found for popped value." << endl;
+			test_success = false;
+		}
+	}
+	else
+	{
+		cout << "FAIL - Nullptr was received from pop when the value of 4 should have been found." << endl;
+		test_success = false;
+	}
+
+	if(stack_default_constructor->GetSize() == 1)
+	{
+		cout << "Success - Stack is the correct size after Pop function call." << endl;
+	}
+	else
+	{
+		cout << "FAIL - Stack is the wrong size after Pop function call." << endl;
+		test_success = false;
+	}
+
+
+	// PopValue Tests
+	auto pop_value = stack_default_constructor->PopValue();
+	if(pop_value == 5)
+	{
+		cout << "Success - PopValue returned 5 as expected." << endl;
+	}
+	else
+	{
+		cout << "FAIL - PopValue returned incorrect value. Expected 5, received " << pop_value << endl;
+		test_success = false;
+	}
+
+
+
 	// Load Testing Stack with many Push function calls
-	for(int counter = 0; counter < 1000; counter++)
+	for(int counter = 0; counter < 10000; counter++)
 	{
 		stack_default_constructor->Push(counter);
 	}
-	if(stack_default_constructor->GetSize() == 1002)
+	if(stack_default_constructor->GetSize() == 10000)
 	{
-		cout << "Success - 1002 nodes now found in the stack after load testing." << endl;
+		cout << "Success - 10000 nodes now found in the stack after load testing." << endl;
 	}
 	else
 	{
 		cout << "FAIL - Incorrect number of nodes found in the stack after load testing." << endl;
 	}
+
+	
 
 
 	return test_success;
