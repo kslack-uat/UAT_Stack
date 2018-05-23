@@ -1,10 +1,9 @@
+// CSC382_Stack - Stack implementation for the CSC382 course at UAT
+// Coded by: Kent Slack
+
 #include "stdafx.h"
 #include <memory>
 #include <iostream>
-
-
-// CSC382_Stack.cpp : Defines the entry point for the console application.
-//
 
 using namespace std;
 
@@ -71,7 +70,7 @@ public:
 	}
 
 	// Constructs an empty stack object and then adds the specified initial value
-	CSC382_Stack(generic_type initial_stack_value)
+	CSC382_Stack(const generic_type initial_stack_value)
 	{
 		init();
 		Push(initial_stack_value);
@@ -116,7 +115,7 @@ public:
 
 	// Creates a new StackNode and pushes it onto the top of the stack
 	// Returns whether the push was successfully executed
-	bool Push(generic_type insert_value)
+	bool Push(const generic_type insert_value)
 	{
 		auto new_stack_node = make_shared<StackNode<generic_type>>(insert_value);
 		bool push_status = PushNode(new_stack_node);
@@ -150,17 +149,10 @@ public:
 		return top->GetData();
 	}
 
-	// Peek at the value of the top node without removing it.
-	generic_type Peek()
+	// Peek at the top node without removing it.
+	shared_ptr<StackNode<generic_type>> Peek()
 	{
-		if (top != nullptr)
-		{
-			return top->GetData();
-		}
-		else
-		{
-			return NULL;
-		}
+		return top;
 	}
 
 	// Returns the size of the stack (number of nodes in it)
@@ -173,11 +165,13 @@ public:
 	void PrintStack()
 	{
 		auto current_node = top;
+		// Iterates over the stack and prints the data stored in each node of the stack
 		while(current_node != nullptr)
 		{
 			cout << current_node->GetData() << endl;
 			current_node = current_node->GetNext();
 		}
+		// Message to display if the stack is empty
 		if(size == 0)
 		{
 			cout << "The stack is empty." << endl;
