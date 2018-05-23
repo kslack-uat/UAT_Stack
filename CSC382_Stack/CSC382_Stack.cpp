@@ -124,7 +124,7 @@ public:
 	}
 
 	// Pops a node off the stack and returns a smart pointer to the node
-	shared_ptr<StackNode<generic_type>> PopNode()
+	shared_ptr<StackNode<generic_type>> Pop()
 	{
 		auto old_top = top;
 		top = top->GetNext();
@@ -132,9 +132,9 @@ public:
 	}
 
 	// Pops a node off the stack and returns the value stored in the node
-	generic_type Pop()
+	generic_type PopValue()
 	{
-		shared_ptr<StackNode<generic_type>> popped_node = PopNode();
+		auto popped_node = Pop();
 		return popped_node->GetData();
 	}
 
@@ -200,9 +200,7 @@ bool StackTestingSuite()
 	//**************************************
 	//****** Stack Constructor Tests *******
 	//****** Default Stack Constructor Tests
-	//make_shared<StackNode<generic_type>>(insert_value);
-	//CSC382_Stack<int>* stack_default_constructor = new CSC382_Stack<int>();		// Creates a new stack that is allocated on the heap
-	auto stack_default_constructor = make_shared<CSC382_Stack<int>>();
+	auto stack_default_constructor = make_shared<CSC382_Stack<int>>();		// Creates a new stack
 	int stack_size = stack_default_constructor->GetSize();
 	if (stack_size == 0)
 	{
@@ -226,7 +224,6 @@ bool StackTestingSuite()
 	}
 
 	//****** Single Parameter Constructor Test
-	//CSC382_Stack<char>* char_stack = new CSC382_Stack<char>('u');
 	auto char_stack = make_shared<CSC382_Stack<char>>('u');
 	int char_stack_size = char_stack->GetSize();
 	if(char_stack_size == 1)
@@ -277,8 +274,33 @@ bool StackTestingSuite()
 
 
 	// PushNode Tests
-	//auto new_stack_node = StackNode<int>(4);
-	//stack_default_constructor->PushNode(new_stack_node);
+	auto new_stack_node = make_shared<StackNode<int>>(4);
+	stack_default_constructor->PushNode(new_stack_node);
+	if(stack_default_constructor->GetSize() == 2)
+	{
+		cout << "Success - Stack is size 2 after PushNode function called." << endl;
+	}
+	else
+	{
+		cout << "FAIL - Stack is not size 2 after PushNode function call." << endl;
+		test_success = false;
+	}
+
+	top_value = stack_default_constructor->PeekValue();
+	if (top_value == 4)
+	{
+		cout << "Success - Top value of stack is 4 as expected after PushNode function call." << endl;
+	}
+	else
+	{
+		cout << "FAIL - Top value of stack is " << top_value << ". Expected a value of 4 after PushNode function call." << endl;
+		test_success = false;
+	}
+
+
+	// 
+
+
 
 	return test_success;
 }
