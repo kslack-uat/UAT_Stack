@@ -12,7 +12,7 @@ template <typename generic_type>
 class StackNode
 {
 private:
-	generic_type data;							// Data to be stored in the node
+	generic_type data;						// Data to be stored in the node
 	shared_ptr<StackNode> next_node;		// Smart pointer to the next node in the stack (nullptr if empty)
 
 public:
@@ -34,7 +34,6 @@ public:
 	~StackNode()
 	{
 		data = NULL;
-		//next_node->reset();		// decrements this next_node reference counter. When this counter becomes 0, it will be garbage collected (finally removed)
 		next_node = nullptr;		// decrements this next_node reference counter. When this counter becomes 0, it will be garbage collected (finally removed)
 	}
 
@@ -114,13 +113,10 @@ public:
 	}
 
 	// Creates a new StackNode and pushes it onto the top of the stack
-	// Returns whether the push was successfully executed
 	void Push(const generic_type insert_value)
 	{
 		auto new_stack_node = make_shared<StackNode<generic_type>>(insert_value);
 		PushNode(new_stack_node);
-		//bool push_status = PushNode(new_stack_node);
-		//return push_status;
 	}
 
 	// Pops a node off the stack and returns a smart pointer to the node
@@ -192,7 +188,8 @@ public:
 
 bool NodeTestingSuite()
 {
-	return false;
+	// This should be implemented. Try building the test suite for the node class as practice.
+	return true;
 }
 
 bool StackTestingSuite()
@@ -395,9 +392,19 @@ bool StackTestingSuite()
 bool TestingSuite()
 {
 	system("CLS");
-	NodeTestingSuite();
+	bool node_test_status = NodeTestingSuite();
 
-	StackTestingSuite();
+	bool stack_test_status = StackTestingSuite();
+
+	if(node_test_status && stack_test_status)
+	{
+		cout << "~~~~~~~~~ All Test Successfully Passed! ~~~~~~~~~~~~" << endl;
+	}
+	else
+	{
+		cout << "~~~~~~~~~ Some or all tests FAILED! ~~~~~~~~~~~~~~~~" << endl;
+	}
+
 	cout << endl << endl << endl;
 	return false;
 }
@@ -475,7 +482,6 @@ void Menu()
 
 int main()
 {
-	//TestingSuite();
 	Menu();
 	system("pause");
 	return 0;
