@@ -361,6 +361,16 @@ bool StackTestingSuite()
 		test_success = false;
 	}
 
+	if (stack_default_constructor->GetSize() == 0)
+	{
+		cout << "Success - The stack is empty following PopValue." << endl;
+	}
+	else
+	{
+		cout << "FAIL - Following the PopValue function call, the stack reports the wrong size. " << stack_default_constructor->GetSize() << endl;
+		test_success = false;
+	}
+
 
 
 	// Load Testing Stack with many Push function calls
@@ -376,8 +386,6 @@ bool StackTestingSuite()
 	{
 		cout << "FAIL - Incorrect number of nodes found in the stack after load testing." << endl;
 	}
-
-	
 
 
 	return test_success;
