@@ -163,11 +163,13 @@ public:
 		}
 	}
 
+	// Returns the size of the stack (number of nodes in it)
 	int GetSize()
 	{
 		return size;
 	}
 
+	// Prints the value stored in the stack to the screen
 	void PrintStack()
 	{
 		auto current_node = top;
@@ -175,6 +177,10 @@ public:
 		{
 			cout << current_node->GetData() << endl;
 			current_node = current_node->GetNext();
+		}
+		if(size == 0)
+		{
+			cout << "The stack is empty." << endl;
 		}
 	}
 
