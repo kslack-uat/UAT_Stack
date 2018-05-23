@@ -226,29 +226,80 @@ bool StackTestingSuite()
 
 bool TestingSuite()
 {
+	system("CLS");
 	NodeTestingSuite();
 
 	StackTestingSuite();
-
+	cout << endl << endl << endl;
 	return false;
 }
 
 void Menu()
 {
-	cout << "Welcome to the CSC382 Stack Class. Please specify the operation you would like to perform." << endl;
-	cout << "(1) Construct Stack using default constructor." << endl;
-	cout << "(2) Construct Stack when initial value provided." << endl;
-	cout << "(3) Push a value on the stack." << endl;
-	cout << "(4) Push existing node on the stack." << endl;
-	cout << "(5) Pop a value off the stack." << endl;
-	cout << "(6) Peek at the top value of the stack." << endl;
-	cout << "(7) Print the size of the stack." << endl;
-	cout << "(8) Print the stack." << endl;
+	int selection = -1;
+	while (selection != 0)
+	{
+		CSC382_Stack<int> menu_stack;
+
+		cout << "Welcome to the CSC382 Stack Class. Please specify the operation you would like to perform." << endl;
+		cout << "(1) Construct Stack using default constructor." << endl;
+		cout << "(2) Construct Stack when initial value provided." << endl;
+		cout << "(3) Push a value on the stack." << endl;
+		cout << "(4) Push existing node on the stack." << endl;
+		cout << "(5) Pop a value off the stack." << endl;
+		cout << "(6) Peek at the top value of the stack." << endl;
+		cout << "(7) Print the size of the stack." << endl;
+		cout << "(8) Print the stack." << endl;
+		cout << "(9) Automated Testing Suite." << endl;
+		cout << "(0) Exit" << endl;
+
+		cout << "What operation would you like to perform (specify the number)? " << endl;
+
+		cin >> selection;
+
+		if (selection == 1)
+		{
+			menu_stack = CSC382_Stack<int>();
+		}
+		else if(selection == 2)
+		{
+			
+		}
+		else if (selection == 3)
+		{
+
+		}
+		else if (selection == 4)
+		{
+
+		}
+		else if (selection == 5)
+		{
+
+		}
+		else if (selection == 6)
+		{
+
+		}
+		else if (selection == 7)
+		{
+
+		}
+		else if (selection == 8)
+		{
+
+		}
+		else if (selection == 9)
+		{
+			TestingSuite();
+		}
+	}
 }
 
 int main()
 {
-	TestingSuite();
+	//TestingSuite();
+	Menu();
 	system("pause");
 	return 0;
 }
