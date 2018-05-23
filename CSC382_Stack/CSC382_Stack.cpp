@@ -215,13 +215,25 @@ bool StackTestingSuite()
 	int default_top_value = stack_default_constructor->PeekValue();
 	if (default_top_value == NULL)
 	{
-		cout << "Success - Top is correctly set to nullptr after default constructor call." << endl;
+		cout << "Success - Top value is correctly set to NULL after default constructor call." << endl;
 	}
 	else
 	{
-		cout << "FAIL - Top not set to nullptr following default constructor call." << endl;
+		cout << "FAIL - Top value not set to NULL following default constructor call." << endl;
 		test_success = false;
 	}
+
+	auto top_node_ptr = stack_default_constructor->Peek();
+	if(top_node_ptr == nullptr)
+	{
+		cout << "Success - The top value of the stack is nullptr as expected." << endl;
+	}
+	else
+	{
+		cout << "FAIL - The top value of an empty stack is not nullptr" << endl;
+		test_success = false;
+	}
+
 
 	//****** Single Parameter Constructor Test
 	auto char_stack = make_shared<CSC382_Stack<char>>('u');
@@ -298,8 +310,30 @@ bool StackTestingSuite()
 	}
 
 
-	// 
+	// Print Stack Tests
+	cout << "Printing the current state of the stack to the screen." << endl;
+	cout << "Expected output is:\n4\n5" << endl;
+	cout << "Actual output is:" << endl;
+	stack_default_constructor->PrintStack();
 
+	// Pop Test
+
+
+	
+
+	// Load Testing Stack with many Push function calls
+	for(int counter = 0; counter < 1000; counter++)
+	{
+		stack_default_constructor->Push(counter);
+	}
+	if(stack_default_constructor->GetSize() == 1002)
+	{
+		cout << "Success - 1002 nodes now found in the stack after load testing." << endl;
+	}
+	else
+	{
+		cout << "FAIL - Incorrect number of nodes found in the stack after load testing." << endl;
+	}
 
 
 	return test_success;
