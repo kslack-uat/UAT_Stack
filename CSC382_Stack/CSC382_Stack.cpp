@@ -131,8 +131,16 @@ public:
 	// Pops a node off the stack and returns the value stored in the node
 	generic_type PopValue()
 	{
-		auto popped_node = Pop();
-		return popped_node->GetData();
+		if (top != nullptr)
+		{
+			auto popped_node = Pop();
+			return popped_node->GetData();
+		}
+		else
+		{
+			cout << "Cannot Pop. Stack is empty." << endl;
+			return NULL;
+		}
 	}
 
 	// Peek at the top node on the stack without removing it.
@@ -457,12 +465,18 @@ void Menu()
 		else if (selection == 5)		// Pop a value off the stack
 		{
 			auto pop_value = menu_stack.PopValue();
-			cout << "Pop Value = " << pop_value << endl;
+			if (pop_value)
+			{
+				cout << "Pop Value = " << pop_value << endl;
+			}
 		}
 		else if (selection == 6)		// Peek at the top value of the stack
 		{
 			auto peek_value = menu_stack.PeekValue();
-			cout << "Peek Value = " << peek_value << endl;
+			if (peek_value)
+			{
+				cout << "Peek Value = " << peek_value << endl;
+			}
 		}
 		else if (selection == 7)		// Print the size of the stack
 		{
