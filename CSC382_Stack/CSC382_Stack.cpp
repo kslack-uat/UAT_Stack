@@ -456,11 +456,13 @@ void Menu()
 		}
 		else if (selection == 5)		// Pop a value off the stack
 		{
-			menu_stack.Pop();
+			auto pop_value = menu_stack.PopValue();
+			cout << "Pop Value = " << pop_value << endl;
 		}
 		else if (selection == 6)		// Peek at the top value of the stack
 		{
-			menu_stack.Peek();
+			auto peek_value = menu_stack.PeekValue();
+			cout << "Peek Value = " << peek_value << endl;
 		}
 		else if (selection == 7)		// Print the size of the stack
 		{
