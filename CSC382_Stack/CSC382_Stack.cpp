@@ -126,7 +126,7 @@ public:
 	shared_ptr<StackNode<generic_type>> PopNode()
 	{
 		auto old_top = top;
-		top = top->next_node;
+		top = top->GetNext();
 		return old_top;
 	}
 
@@ -236,11 +236,10 @@ bool TestingSuite()
 
 void Menu()
 {
+	CSC382_Stack<int> menu_stack;
 	int selection = -1;
 	while (selection != 0)
 	{
-		CSC382_Stack<int> menu_stack;
-
 		cout << "Welcome to the CSC382 Stack Class. Please specify the operation you would like to perform." << endl;
 		cout << "(1) Construct Stack using default constructor." << endl;
 		cout << "(2) Construct Stack when initial value provided." << endl;
@@ -253,46 +252,56 @@ void Menu()
 		cout << "(9) Automated Testing Suite." << endl;
 		cout << "(0) Exit" << endl;
 
-		cout << "What operation would you like to perform (specify the number)? " << endl;
-
+		cout << "What operation would you like to perform (specify the number)? ";
 		cin >> selection;
 
-		if (selection == 1)
+		int user_specified_value;
+		if (selection == 1)		// Construct Stack using default constructor
 		{
 			menu_stack = CSC382_Stack<int>();
 		}
-		else if(selection == 2)
+		else if(selection == 2)		// Construct Stack when initial value provided
 		{
-			
+			cout << "What integer value would you like to add to the new stack? ";
+			cin >> user_specified_value;
+			menu_stack = CSC382_Stack<int>(user_specified_value);
 		}
-		else if (selection == 3)
+		else if (selection == 3)		// Push a value on the stack
 		{
-
+			cout << "What integer value would you like to add to the stack? ";
+			cin >> user_specified_value;
+			menu_stack.Push(user_specified_value);
 		}
-		else if (selection == 4)
+		else if (selection == 4)		// Push existing node on the stack
 		{
-
+			cout << "What integer value would you like to add to the stack? ";
+			cin >> user_specified_value;
+			shared_ptr<StackNode<int>> node_to_add = make_shared<StackNode<int>>(user_specified_value);
+			menu_stack.PushNode(node_to_add);
 		}
-		else if (selection == 5)
+		else if (selection == 5)		// Pop a value off the stack
 		{
-
+			menu_stack.Pop();
 		}
-		else if (selection == 6)
+		else if (selection == 6)		// Peek at the top value of the stack
 		{
-
+			menu_stack.Peek();
 		}
-		else if (selection == 7)
+		else if (selection == 7)		// Print the size of the stack
 		{
-
+			cout << "The stack contains " << menu_stack.GetSize() << " nodes." << endl;
 		}
-		else if (selection == 8)
+		else if (selection == 8)		// Print the stack
 		{
-
+			cout << "The stack contains the following values: " << endl;
+			menu_stack.PrintStack();
 		}
-		else if (selection == 9)
+		else if (selection == 9)		// Automated Testing Suite
 		{
 			TestingSuite();
 		}
+
+		cout << endl << endl;
 	}
 }
 
