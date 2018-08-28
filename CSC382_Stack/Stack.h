@@ -53,7 +53,7 @@ public:
 
 // Class to implement the constraints of a Stack. Stores and manages StackNodes.
 template <typename generic_type>
-class CSC382_Stack
+class UAT_Stack
 {
 private:
 	shared_ptr<StackNode<generic_type>> top;
@@ -61,13 +61,13 @@ private:
 
 public:
 	// Default Constructor
-	CSC382_Stack()
+	UAT_Stack()
 	{
 		init();
 	}
 
 	// Constructs an empty stack object and then adds the specified initial value
-	CSC382_Stack(const generic_type initial_stack_value)
+	UAT_Stack(const generic_type initial_stack_value)
 	{
 		init();
 		Push(initial_stack_value);
@@ -81,7 +81,7 @@ public:
 	}
 
 	// Instructions for destorying a stack
-	~CSC382_Stack()
+	~UAT_Stack()
 	{
 		// Iterate through all nodes in the Stack and delete them
 		while (top != nullptr)

@@ -13,7 +13,7 @@ bool StackTestingSuite()
 	//**************************************
 	//****** Stack Constructor Tests *******
 	//****** Default Stack Constructor Tests
-	auto stack_default_constructor = make_shared<CSC382_Stack<int>>();		// Creates a new stack
+	auto stack_default_constructor = make_shared<UAT_Stack<int>>();		// Creates a new stack
 	int stack_size = stack_default_constructor->GetSize();
 	if (stack_size == 0)
 	{
@@ -49,7 +49,7 @@ bool StackTestingSuite()
 
 
 	//****** Single Parameter Constructor Test
-	auto char_stack = make_shared<CSC382_Stack<char>>('u');
+	auto char_stack = make_shared<UAT_Stack<char>>('u');
 	int char_stack_size = char_stack->GetSize();
 	if(char_stack_size == 1)
 	{
@@ -233,7 +233,7 @@ bool TestingSuite()
 
 void Menu()
 {
-	CSC382_Stack<int> menu_stack;
+	UAT_Stack<int> menu_stack;
 	int selection = -1;
 	while (selection != 0)
 	{
@@ -255,13 +255,13 @@ void Menu()
 		int user_specified_value;
 		if (selection == 1)		// Construct Stack using default constructor
 		{
-			menu_stack = CSC382_Stack<int>();
+			menu_stack = UAT_Stack<int>();
 		}
 		else if(selection == 2)		// Construct Stack when initial value provided
 		{
 			cout << "What integer value would you like to add to the new stack? ";
 			cin >> user_specified_value;
-			menu_stack = CSC382_Stack<int>(user_specified_value);
+			menu_stack = UAT_Stack<int>(user_specified_value);
 		}
 		else if (selection == 3)		// Push a value on the stack
 		{
