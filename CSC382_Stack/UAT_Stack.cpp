@@ -1,4 +1,4 @@
-// CSC382_Stack - Stack implementation for the CSC382 course at UAT
+// UAT_Stack - Example Stack implementation for UAT
 // Coded by: Kent Slack
 #include "stdafx.h"
 #include "Stack.h"
